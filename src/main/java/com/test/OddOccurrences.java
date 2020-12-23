@@ -4,6 +4,7 @@ import java.security.InvalidParameterException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class OddOccurrences {
@@ -11,8 +12,6 @@ public class OddOccurrences {
     private static final int SIZE_MAX_LIMIT = 1000000;
     private static final int SIZE_MIN_LIMIT = 1;
 
-    private static final int VALUE_MAX_LIMIT = 1000000000;
-    private static final int VALUE_MIN_LIMIT = 1;
 
     public int solution(int[] A) {
 
@@ -20,10 +19,12 @@ public class OddOccurrences {
 
         Integer[] array = Arrays.stream(A).boxed().toArray(Integer[]::new);
         Map<Integer, List<Integer>> map = Arrays.stream(array).collect(Collectors.groupingBy(val -> val));
-        List<Integer> oddList = map.values().stream().filter(x-> (x.size() % 2)!= 0).map(list -> list.get(0)).collect(Collectors.toList());
+        return map.values().stream().filter(x-> (x.size() % 2)!= 0).mapToInt(ss -> ss.get(0)).min().getAsInt();
 
-        return oddList.get(0);
     }
+
+
+
 
     public static void main(String args[]) {
 

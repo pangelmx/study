@@ -14,26 +14,22 @@ public class MissingNumber {
 
     }
 
-    public int solution(int[] A) {
+//    public int solution(int[] A) {
+//        long length = A.length + 1;
+//        long nPlusOneSum = (length +1) * (length) / 2;
+//        long arraySum = 0;
+//        for (int element : A)
+//            arraySum += element;
+//        return (int)(nPlusOneSum - arraySum);
+//    }
 
-        if (A == null || A.length < 1) return 0;
-
-
-        for (int value =1;  value <= A.length + 1 ; value++)
-            if(!containsValue(A, value)) return value;
-
-        System.out.println("" + Arrays.toString(A));
-
-        return 0;
+    public int solution(int A[]) {
+        int length = A.length;
+        int xor_sum = 0;
+        for (int i=0; i < length; i++) {
+            xor_sum = xor_sum ^ A[i] ^ (i+1);
+        }
+        return xor_sum^(length+1);
     }
-
-
-    private boolean containsValue(final int[] array, final int value) {
-        for(int i=0; i<array.length; i++)
-            if (array[i] == value) return true;
-
-        return false;
-    }
-
 
 }
